@@ -2,6 +2,18 @@ import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { popUrl, imgUrl, apiKey, lang } from '../utils/Constants'
 
+export interface popMovie {
+  id: number
+  poster_path?: string
+}
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin: auto 25%;
+`
+
 const Home = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -33,16 +45,9 @@ const Home = () => {
   if (loading) return <p>Searching Movies...</p>
   if (error) return <p>Sorry, fetching Movies DB does not work. Try later</p>
 
-  const Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    margin: auto 25%;
-  `
-
   return (
     <Wrapper>
-      {popMovies.map((popMovie) => (
+      {popMovies.map((popMovie: popMovie) => (
         <img
           key={popMovie.id}
           src={imgUrl + popMovie.poster_path}

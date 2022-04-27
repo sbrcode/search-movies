@@ -1,17 +1,18 @@
 import React from 'react'
 
 const SearchMovies = () => {
-  const onSearchTermChangeHandler = (e) => {
-    const userInput = e.target.value
-    // setSearchTerm(userInput);
-  }
+  //   const onSearchTermChangeHandler = (e) => {
+  //     const userInput = e.target.value
+  //     // setSearchTerm(userInput);
+  //   }
 
-  const onClearSearchTermHandler = () => {
-    // clearSearchTerm();
-  }
+  //   const onClearSearchTermHandler = () => {
+  //     // clearSearchTerm();
+  //   }
 
   return (
-    <div id="search-container">
+    <div>
+      {/* <div id="search-container"> */}
       {/* <img id="search-icon" alt="" src={magnify} />
       <input
         id="search"

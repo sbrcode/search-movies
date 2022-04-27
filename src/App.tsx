@@ -8,9 +8,7 @@ const App = () => {
         <section>
           <SearchMovies />
         </section>
-        <hr />
         <section>
-          <h2>Popular Movies</h2>
           <Home />
         </section>
       </main>
@@ -19,4 +17,3 @@ const App = () => {
 }
 
 export default App
-
