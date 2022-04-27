@@ -1,33 +1,56 @@
-import React, { useEffect } from 'react'
-
-// import { addRecipe } from '../favoriteRecipes/favoriteRecipesSlice.js'
-// import { loadData, selectFilteredAllRecipes } from './allRecipesSlice'
-// import FavoriteButton from '../../components/FavoriteButton'
-// import Recipe from '../../components/Recipe'
-// import mdiHeartPlus from '../../assets/heart-plus.png'
+import { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { popUrl, imgUrl, apiKey, lang } from '../utils/Constants'
 
 const Home = () => {
-  // const allRecipes = useSelector(selectFilteredAllRecipes);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(loadData())
-  // }, [dispatch])
-  // const onAddRecipeHandler = (recipe) => {
-  //   dispatch(addRecipe(recipe))
-  // }
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const [popMovies, setPopMovies] = useState([])
+
+  const page = 1
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`${popUrl}?api_key=${apiKey}&language=${lang}&page=${page}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw response
+      })
+      .then((data) => {
+        setPopMovies(data.results)
+      })
+      .catch((error) => {
+        console.error(error)
+        setError(error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return <p>Searching Movies...</p>
+  if (error) return <p>Sorry, fetching Movies DB does not work. Try later</p>
+
+  const Wrapper = styled.div`
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin: auto 25%;
+  `
+
   return (
-    <div className="recipes-container">
-      {/* {allRecipes.map((recipe) => (
-        <Recipe recipe={recipe} key={recipe.id}>
-          <FavoriteButton
-            onClickHandler={() => onAddRecipeHandler(recipe)}
-            icon={mdiHeartPlus}
-          >
-            Add to Favorites
-          </FavoriteButton>
-        </Recipe>
-      ))} */}
-    </div>
+    <Wrapper>
+      {popMovies.map((popMovie) => (
+        <img
+          key={popMovie.id}
+          src={imgUrl + popMovie.poster_path}
+          alt={popMovie.poster_path}
+          width={'100%'}
+        />
+      ))}
+    </Wrapper>
   )
 }
 
