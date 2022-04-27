@@ -1,6 +1,6 @@
 ## Clone project
 
-### `git clone search-movies`
+### `git clone https://github.com/sbrcode/search-movies.git`
 
 ## Install dependancies
 
@@ -12,4 +12,4 @@
 
 ### `yarn start`
 
-## Enjoy popular movies or search others...
+### Have a look at popular movies or search others...
