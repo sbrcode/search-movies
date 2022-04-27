@@ -1,35 +1,37 @@
 import { useState } from 'react'
-import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
+import styled from 'styled-components'
+
+const SearchContainer = styled.div`
+  padding: 5px;
+  margin: auto 25%;
+`
 
 const SearchMovies = () => {
   const [searchMovie, setSearchMovie] = useState('')
 
-  const onSearchTermChangeHandler = (e: { target: { value: any } }) => {
+  const onSearchChangeHandler = (e: { target: { value: any } }) => {
     const movieInput = e.target.value
     setSearchMovie(movieInput)
   }
 
-  const onClearSearchTermHandler = () => {
+  const onClearSearchHandler = () => {
     setSearchMovie('')
   }
 
   return (
-    <div>
-      <SearchIcon sx={{ fontSize: 24 }} />
+    <SearchContainer>
       <input
-        id="search"
         type="text"
         value={searchMovie}
-        onChange={onSearchTermChangeHandler}
+        onChange={onSearchChangeHandler}
         placeholder="Search movies"
+        style={{ width: '95%' }}
       />
       {searchMovie.length > 0 && (
-        <button onClick={onClearSearchTermHandler} type="button">
-          <CloseIcon sx={{ fontSize: 12 }} />
-        </button>
+        <CloseIcon sx={{ fontSize: 20 }} onClick={onClearSearchHandler} />
       )}
-    </div>
+    </SearchContainer>
   )
 }
 
