@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CloseIcon from '@mui/icons-material/Close'
+import closeIcon from '../assets/close.png'
 import styled from 'styled-components'
 
 const SearchContainer = styled.div`
@@ -29,7 +29,13 @@ const SearchMovies = () => {
         style={{ width: '95%' }}
       />
       {searchMovie.length > 0 && (
-        <CloseIcon sx={{ fontSize: 20 }} onClick={onClearSearchHandler} />
+        <img
+          src={closeIcon}
+          alt=""
+          onClick={onClearSearchHandler}
+          width={20}
+          style={{ marginLeft: 5 }}
+        />
       )}
     </SearchContainer>
   )
