@@ -1,18 +1,22 @@
-import React from 'react';
+import SearchMovies from './components/SearchMovies'
+import Home from './pages/Home'
 
-function App() {
+const App = () => {
   return (
     <div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <main>
+        <section>
+          <SearchMovies />
+        </section>
+        <hr />
+        <section>
+          <h2>Popular Movies</h2>
+          <Home />
+        </section>
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
