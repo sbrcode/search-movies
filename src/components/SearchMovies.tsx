@@ -1,31 +1,35 @@
-import React from 'react'
+import { useState } from 'react'
+// import { Search, Close } from '@mui/icons-material'
+import SearchIcon from '@mui/icons-material/Search'
+import CloseIcon from '@mui/icons-material/Close'
 
 const SearchMovies = () => {
-  //   const onSearchTermChangeHandler = (e) => {
-  //     const userInput = e.target.value
-  //     // setSearchTerm(userInput);
-  //   }
+  const [searchMovie, setSearchMovie] = useState('')
 
-  //   const onClearSearchTermHandler = () => {
-  //     // clearSearchTerm();
-  //   }
+  const onSearchTermChangeHandler = (e: { target: { value: any } }) => {
+    const movieInput = e.target.value
+    setSearchMovie(movieInput)
+  }
+
+  const onClearSearchTermHandler = () => {
+    setSearchMovie('')
+  }
 
   return (
     <div>
-      {/* <div id="search-container"> */}
-      {/* <img id="search-icon" alt="" src={magnify} />
+      <SearchIcon sx={{ fontSize: 24 }} />
       <input
         id="search"
         type="text"
-        value={searchTerm}
+        value={searchMovie}
         onChange={onSearchTermChangeHandler}
-        placeholder="Search recipes"
+        placeholder="Search movies"
       />
-      {searchTerm.length > 0 && (
-      <button onClick={onClearSearchTermHandler} type="button" id="search-clear-button">
-        <img src={close} alt="" />
-      </button>
-      )} */}
+      {searchMovie.length > 0 && (
+        <button onClick={onClearSearchTermHandler} type="button">
+          <CloseIcon sx={{ fontSize: 12 }} />
+        </button>
+      )}
     </div>
   )
 }
