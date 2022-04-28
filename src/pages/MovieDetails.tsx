@@ -15,7 +15,7 @@ interface detailsMovie {
 
 const Container = styled.div`
   display: grid;
-  margin: auto 25%;
+  margin: 25px 25%;
   gap: 25px;
   grid-template-areas: 'div img';
   font-family: ${fonts.primary};
