@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { popUrl, imgUrl, apiKey, lang, searchUrl } from '../utils/Constants'
 import closeIcon from '../assets/close.png'
@@ -23,6 +24,7 @@ const SearchContainer = styled.div`
 
 const Poster = styled.img`
   &:hover {
+    cursor: pointer;
     ${(props) => (props.title ? props.title : 'untitled')};
   }
 `
@@ -105,13 +107,15 @@ const Home = () => {
           {loading && <p>Searching Movies...</p>}
           {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
           {popMovies.map((popMovie: popMovie) => (
-            <Poster
-              title={popMovie.original_title}
-              key={popMovie.id}
-              src={imgUrl + popMovie.poster_path}
-              alt={popMovie.poster_path}
-              width={'100%'}
-            />
+            <Link to={`/${popMovie.id}`}>
+              <Poster
+                title={popMovie.original_title}
+                key={popMovie.id}
+                src={imgUrl + popMovie.poster_path}
+                alt={popMovie.original_title}
+                width={'100%'}
+              />
+            </Link>
           ))}
         </>
       </Wrapper>
