@@ -6,3 +6,7 @@ export const colors = {
   blue: 'cornflowerblue',
   white: 'white',
 }
+
+export const fonts = {
+  primary: 'roboto',
+}

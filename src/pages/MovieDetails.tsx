@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { detailsUrl, imgUrl, apiKey, lang } from '../utils/Constants'
+import { fonts } from '../utils/Themes'
 
 interface detailsMovie {
   id: number
@@ -15,7 +16,9 @@ interface detailsMovie {
 const Container = styled.div`
   display: grid;
   margin: auto 25%;
+  gap: 25px;
   grid-template-areas: 'div img';
+  font-family: ${fonts.primary};
 `
 
 const MovieDetails = () => {
@@ -45,7 +48,7 @@ const MovieDetails = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [myParam.movieId])
 
   return (
     <>
