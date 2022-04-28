@@ -21,6 +21,12 @@ const SearchContainer = styled.div`
   margin: auto 25%;
 `
 
+const Poster = styled.img`
+  &:hover {
+    ${(props) => (props.title ? props.title : 'untitled')};
+  }
+`
+
 const Home = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -99,7 +105,8 @@ const Home = () => {
           {loading && <p>Searching Movies...</p>}
           {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
           {popMovies.map((popMovie: popMovie) => (
-            <img
+            <Poster
+              title={popMovie.original_title}
               key={popMovie.id}
               src={imgUrl + popMovie.poster_path}
               alt={popMovie.poster_path}
