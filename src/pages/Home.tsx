@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { popUrl, imgUrl, apiKey, lang, searchUrl } from '../utils/Constants'
+import { imgUrl } from '../utils/Constants'
+import { sendRequest } from '../api/Api'
 import closeIcon from '../assets/close.png'
 import { movieProps } from '../api/types'
 
@@ -33,48 +34,18 @@ const Home = () => {
   const page = 1
 
   useEffect(() => {
-    setLoading(true)
-    fetch(`${popUrl}?api_key=${apiKey}&language=${lang}&page=${page}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw response
-      })
-      .then((data) => {
-        setPopMovies(data.results)
-      })
-      .catch((error) => {
-        console.error(error)
-        setError(error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    sendRequest({ setPopMovies, setLoading, setError, page })
   }, [])
 
   const onSearchChangeHandler = (e: { target: { value: string } }) => {
-    setLoading(true)
-    const movieInput = e.target.value
-    setSearchMovie(movieInput)
-    fetch(
-      `${searchUrl}?api_key=${apiKey}&language=${lang}&query=${movieInput.toLowerCase()}`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw response
-      })
-      .then((data) => {
-        setPopMovies(data.results)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    sendRequest({
+      search: true,
+      movieInput: e.target.value,
+      setPopMovies,
+      setLoading,
+      setError,
+      page,
+    })
   }
 
   return (
@@ -83,7 +54,10 @@ const Home = () => {
         <input
           type="text"
           value={searchMovie}
-          onChange={onSearchChangeHandler}
+          onChange={(e) => {
+            setSearchMovie(e.target.value)
+            onSearchChangeHandler(e)
+          }}
           placeholder="Search movies"
           style={{ width: '95%' }}
         />
@@ -91,27 +65,28 @@ const Home = () => {
           <img
             src={closeIcon}
             alt=""
-            onClick={() => setSearchMovie('')}
+            onClick={() => {
+              setSearchMovie('')
+              sendRequest({ setPopMovies, setLoading, setError, page })
+            }}
             width={20}
             style={{ marginLeft: 5 }}
           />
         )}
       </SearchContainer>
       <Wrapper>
-        <>
-          {loading && <p>Searching Movies...</p>}
-          {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
-          {popMovies.map((popMovie: movieProps) => (
-            <Link to={`/${popMovie.id}`} key={popMovie.id}>
-              <Poster
-                title={popMovie.original_title}
-                src={imgUrl + popMovie.poster_path}
-                alt={popMovie.original_title}
-                width={'100%'}
-              />
-            </Link>
-          ))}
-        </>
+        {loading && <p>Searching Movies...</p>}
+        {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
+        {popMovies.map((popMovie: movieProps) => (
+          <Link to={`/${popMovie.id}`} key={popMovie.id}>
+            <Poster
+              title={popMovie.original_title}
+              src={imgUrl + popMovie.poster_path}
+              alt={popMovie.original_title}
+              width={'100%'}
+            />
+          </Link>
+        ))}
       </Wrapper>
     </div>
   )
