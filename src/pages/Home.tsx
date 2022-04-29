@@ -72,12 +72,12 @@ const Home = () => {
       })
       .then((data) => {
         setPopMovies(data.results)
+        setSearchMovie(movieInput)
       })
       .catch((error) => {
         console.error(error)
       })
       .finally(() => {
-        setSearchMovie(movieInput)
         setLoading(false)
       })
   }
@@ -107,10 +107,9 @@ const Home = () => {
           {loading && <p>Searching Movies...</p>}
           {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
           {popMovies.map((popMovie: popMovie) => (
-            <Link to={`/${popMovie.id}`}>
+            <Link to={`/${popMovie.id}`} key={popMovie.id}>
               <Poster
                 title={popMovie.original_title}
-                key={popMovie.id}
                 src={imgUrl + popMovie.poster_path}
                 alt={popMovie.original_title}
                 width={'100%'}
