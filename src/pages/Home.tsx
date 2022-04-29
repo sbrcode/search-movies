@@ -37,17 +37,6 @@ const Home = () => {
     sendRequest({ setPopMovies, setLoading, setError, page })
   }, [])
 
-  const onSearchChangeHandler = (e: { target: { value: string } }) => {
-    sendRequest({
-      search: true,
-      movieInput: e.target.value,
-      setPopMovies,
-      setLoading,
-      setError,
-      page,
-    })
-  }
-
   return (
     <div>
       <SearchContainer>
@@ -56,7 +45,14 @@ const Home = () => {
           value={searchMovie}
           onChange={(e) => {
             setSearchMovie(e.target.value)
-            onSearchChangeHandler(e)
+            sendRequest({
+              search: true,
+              movieInput: e.target.value,
+              setPopMovies,
+              setLoading,
+              setError,
+              page,
+            })
           }}
           placeholder="Search movies"
           style={{ width: '95%' }}
