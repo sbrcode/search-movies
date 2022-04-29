@@ -61,6 +61,7 @@ const Home = () => {
   const onSearchChangeHandler = (e: { target: { value: string } }) => {
     setLoading(true)
     const movieInput = e.target.value
+    setSearchMovie(movieInput)
     fetch(
       `${searchUrl}?api_key=${apiKey}&language=${lang}&query=${movieInput.toLowerCase()}`
     )
@@ -72,7 +73,6 @@ const Home = () => {
       })
       .then((data) => {
         setPopMovies(data.results)
-        setSearchMovie(movieInput)
       })
       .catch((error) => {
         console.error(error)

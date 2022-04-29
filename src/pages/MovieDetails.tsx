@@ -57,7 +57,7 @@ const MovieDetails = () => {
         <p>{detailsMovie?.overview}</p>
         <p>{detailsMovie?.vote_average} / 10</p>
       </div>
-      <img src={imgUrl + detailsMovie?.poster_path} alt={detailsMovie?.original_title} />
+      <img src={imgUrl + detailsMovie?.poster_path} alt="" />
     </Container>
   )
 }
