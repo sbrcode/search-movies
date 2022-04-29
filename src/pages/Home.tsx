@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { popUrl, imgUrl, apiKey, lang, searchUrl } from '../utils/Constants'
 import closeIcon from '../assets/close.png'
-
-interface popMovie {
-  id: number
-  poster_path?: string
-  original_title?: string
-}
+import { movieProps } from '../api/types'
 
 const Wrapper = styled.div`
   display: grid;
@@ -106,7 +101,7 @@ const Home = () => {
         <>
           {loading && <p>Searching Movies...</p>}
           {error && <p>Sorry, fetching Movies DB does not work. Try later</p>}
-          {popMovies.map((popMovie: popMovie) => (
+          {popMovies.map((popMovie: movieProps) => (
             <Link to={`/${popMovie.id}`} key={popMovie.id}>
               <Poster
                 title={popMovie.original_title}

@@ -4,11 +4,11 @@ import { colors, fonts } from '../utils/Themes'
 import useDarkMode from 'use-dark-mode'
 import '../index.css'
 
-interface NavBar {
+interface BannerProps {
   dark: boolean
 }
 
-const Banner = styled.nav<NavBar>`
+const Banner = styled.nav<BannerProps>`
   display: flex;
   background-color: ${(props) => (props.dark ? colors.secondary : colors.primary)};
   flex-direction: row;

@@ -3,15 +3,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { detailsUrl, imgUrl, apiKey, lang } from '../utils/Constants'
 import { fonts } from '../utils/Themes'
-
-interface detailsMovie {
-  id: number
-  adult?: boolean
-  poster_path?: string
-  original_title?: string
-  overview?: string
-  vote_average?: number
-}
+import { movieProps } from '../api/types'
 
 const Container = styled.div`
   display: grid;
@@ -24,7 +16,7 @@ const Container = styled.div`
 const MovieDetails = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const [detailsMovie, setDetailsMovie] = useState<detailsMovie | null>(null)
+  const [detailsMovie, setDetailsMovie] = useState<movieProps | null>(null)
   const myParam = useParams()
 
   useEffect(() => {
